@@ -8,6 +8,8 @@ public class UI_Manager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreDisplay;
 
+    public GameObject playButton;
+
     GameManager gameManager;
     private void Start()
     {
@@ -16,6 +18,6 @@ public class UI_Manager : MonoBehaviour
 
     private void OnGUI()
     {
-        scoreDisplay.text = ("score") + gameManager.ScoreDisplay();
+        scoreDisplay.text = ("Score: ") + gameManager.ScoreDisplay();
     }
 }
