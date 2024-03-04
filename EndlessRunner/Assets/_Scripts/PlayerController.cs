@@ -12,11 +12,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundDistance = 0.25f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float jumpTime = 0.25f;
+    [SerializeField] private float speed = 8f;
+
 
 
     private bool isGrounded = true;
     private bool isJumping = false;
     private float jumpTimer;
+    private float horizontal;
+    private bool isFacingRight = true;
 
     // Update is called once per frame
     private void Update()
@@ -58,6 +62,25 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
             jumpTimer = 0;
+        }
+
+        horizontal = Input.GetAxisRaw("Horizontal");
+
+        Flip();
+    }
+    private void FixedUpdate()
+    {
+        playerRB.velocity = new Vector2(horizontal * speed, playerRB.velocity.y);
+    }
+
+    private void Flip()
+    {
+        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
         }
     }
 }
