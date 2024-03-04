@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D playerRB;
     public float jumpForce;
+    public Animator animator;
 
     [SerializeField] private Transform feetPosition;
     [SerializeField] private float groundDistance = 0.25f;
@@ -25,6 +26,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+
+        if(Input.GetButton("Horizontal"))
+        {
+            animator.SetFloat("Moving", 0.01f);
+        }
+
+        if (Input.GetButtonUp("Horizontal"))
+        {
+            animator.SetFloat("Moving", 0f);
+        }
 
         if (Physics2D.OverlapCircle(feetPosition.position, groundDistance, groundLayer) == true)
         {
